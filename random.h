@@ -1,0 +1,1 @@
+int ramDom(int varSecret) ;
