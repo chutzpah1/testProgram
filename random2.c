@@ -6,7 +6,7 @@ int main(int argc, char* argv[])
 {
 	
 	int a[3][3] = { 0 };
-	a[0][0] = 9 ;//Chon vi tri ngau nhien cho so bat ky
+	a[1][2] = 4 ;//Chon vi tri ngau nhien cho so bat ky
 	/*int k = 2;
 	for (int i = 0; i < 2; i++)
 	{
@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 		}
 		printf("\n");
 	}*/
-	int t = 0;
+	
 	//Tao 1 mang luu tru cac so
 	int b[9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	for (int k = 0; k < 9; k++)
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				//Kiem tra xem element co bang gia tri nao trong mang da tao neu co set = 0
+				//Kiem tra xem element co bang gia tri nao trong mang da tao neu co setb[k] = 0
 				if (a[i][j] == b[k])
 				{
 					b[k] = 0;
