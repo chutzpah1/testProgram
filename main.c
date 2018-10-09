@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 	char *game[] = { "Nai", "Bau", "Ga", "Ca", "Cua","Tom" };
 	//Array money random only for computer!
 	int money[] = { 1000, 2000, 3000, 4000, 5000, 10000,100000, 200000 };
-	Sleep(1000); printf("."); Sleep(1000); printf("."); Sleep(1000); printf("."); Sleep(1000); printf(".\n");
+	printf("Loading Game"); Sleep(1000); printf("."); Sleep(1000); printf("."); Sleep(1000); printf("."); Sleep(1000); printf(".\n");
 	printf("\t\t--------|Welcome to play Game|-->Bau Cua<--|--------\n");
 	printf("1.Nai\t\t2.Bau\t\t3.Ga\n4.Ca\t\t5.Cua\t\t6.Tom\n");
 	//Array select of human
@@ -24,11 +24,13 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < selectH; i++)
 	{
 		//Select mascot as you like (1.Nai 2.Bau 3.Ga 4.Ca 5.Cua 6.Tom)
-		printf("Your next turn:%d  \n",i + 1);
+		printf("Your turn:%d  \n",i + 1);
 		//Save select mascot your in human[i]
 		scanf_s("%d", &human[i]);
+		//Print select mascot corresponding array game[]
+		printf("You select '%s'\n", game[human[i] - 1]);
 		//Money pile of human
-		printf("Money pile turn %d:  \n", i + 1);
+		printf("%d.Money pile turn for '%s':  \n",i + 1, game[human[i] - 1]);
 		//Save money pile your in array selectH[i]
 		scanf_s("%d", &selectMoneyH[i]);
 	}
