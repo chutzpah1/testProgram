@@ -37,15 +37,23 @@ int main(int argc, char* argv[])
 		printf("You select '%s' and money pile '%d'\n", game[human[i] - 1], selectMoneyH[i]);
 	}
 	//Array select of computer
-	int computer[6] = { 0 };
+	int computer[6] = { 0, 1, 2, 3, 4, 5 };
+	for (int i = 0; i < 6; i++)
+	{
+		int j = rand() % 6;
+		if (i != j)
+		{
+			int t = computer[i];
+			computer[i] = computer[j];
+			computer[j] = t;
+		}
+	}
 	//Array select money of computer
 	int selectMoneyC[6] = { 0 };
 	//Random select turn computer
 	int selectC = rand() % 5 + 1;
 	for (int i = 0; i < selectC; i++)
 	{
-		//Random select mascot of computer
-		computer[i] = rand() % 5;
 		//Random select money pile of computer from array money[]
 		selectMoneyC[i] = money[rand() % 8];
 	}
@@ -80,7 +88,6 @@ int main(int argc, char* argv[])
 		{
 			//Check value of dice has some select human
 			if (game[dice[i]] == game[human[j] - 1])
-            //Increase value corresponding at tempC[i]
 				tempH[j]++;
 		}
 	}
@@ -90,13 +97,11 @@ int main(int argc, char* argv[])
 		{
 			//Check value of dice has some select human
 			if (game[dice[i]] == game[computer[j]])
-            //Increase value corresponding at tempC[i]
 				tempC[j]++;
 		}
 	}
 	for (int i = 0; i < selectH; i++)
 	{
-   
 	    printf("Money earned of Human '%s' is %d\n",game[human[i] - 1], selectMoneyH[i] * tempH[i]);
 	}
 	printf("\n\n");
