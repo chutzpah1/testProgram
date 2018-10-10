@@ -6,9 +6,9 @@ int main(int argc, char* argv[])
 {
 	srand(time(NULL));
 	//Array select for human and computer
-	char *game[] = { "Nai", "Bau", "Ga", "Ca", "Cua","Tom" };
+	char *game[] = { "Nai", "Bau", "Ga", "Ca", "Cua", "Tom" };
 	//Array money random only for computer!
-	int money[] = { 1000, 2000, 3000, 4000, 5000, 10000,100000, 200000 };
+	int money[] = { 1000, 2000, 3000, 4000, 5000, 10000, 100000, 200000 };
 	printf("Loading Game"); Sleep(1000); printf("."); Sleep(1000); printf("."); Sleep(1000); printf("."); Sleep(1000); printf(".\n");
 	printf("\t\t--------|Welcome to play Game|-->Bau Cua<--|--------\n");
 	printf("1.Nai\t\t2.Bau\t\t3.Ga\n4.Ca\t\t5.Cua\t\t6.Tom\n");
@@ -24,14 +24,14 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < selectH; i++)
 	{
 		//Select mascot as you like (1.Nai 2.Bau 3.Ga 4.Ca 5.Cua 6.Tom)
-		printf("Your turn:%d  \n",i + 1);
+		printf("Your turn:%d  \n", i + 1);
 		//Save select mascot your in human[i]
 		scanf_s("%d", &human[i]);
 		//Print select mascot corresponding array game[]
 		printf("You select '%s'\n", game[human[i] - 1]);
 		//Money pile of human
-		printf("%d.Money pile turn for '%s':  \n",i + 1, game[human[i] - 1]);
-		//Save money pile your in array selectH[i]
+		printf("%d.Money pile turn for '%s':  \n", i + 1, game[human[i] - 1]);
+		//Save money pile your in array selectMoneyH[i]
 		scanf_s("%d", &selectMoneyH[i]);
 	}
 	for (int i = 0; i < selectH; i++)
@@ -39,23 +39,15 @@ int main(int argc, char* argv[])
 		printf("You select '%s' and money pile '%d'\n", game[human[i] - 1], selectMoneyH[i]);
 	}
 	//Array select of computer
-	int computer[6] = { 0, 1, 2, 3, 4, 5 };
-	for (int i = 0; i < 6; i++)
-	{
-		int j = rand() % 6;
-		if (i != j)
-		{
-			int t = computer[i];
-			computer[i] = computer[j];
-			computer[j] = t;
-		}
-	}
+	int computer[6] = { 0 };
+	
 	//Array select money of computer
 	int selectMoneyC[6] = { 0 };
 	//Random select turn computer
 	int selectC = rand() % 5 + 1;
 	for (int i = 0; i < selectC; i++)
 	{
+		computer[i] = rand() % 6;
 		//Random select money pile of computer from array money[]
 		selectMoneyC[i] = money[rand() % 8];
 	}
@@ -69,7 +61,7 @@ int main(int argc, char* argv[])
 	int tempH[6] = { 0 }, tempC[6] = { 0 };
 	for (int i = 0; i < 3; i++)
 	{
-		dice[i] = rand() % 6 ;
+		dice[i] = rand() % 6;
 		printf("Dicing....\n");
 		Sleep(1000);
 		printf(".");
@@ -84,32 +76,29 @@ int main(int argc, char* argv[])
 		printf("Dice %d: %s\n", i + 1, game[dice[i]]);
 	}
 	//Calculate
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = 0; j < selectH; j++)
-		{
-			//Check value of dice has some select human
-			if (game[dice[i]] == game[human[j] - 1])
-				tempH[j]++;
-		}
-	}
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = 0; j < selectC; j++)
-		{
-			//Check value of dice has some select human
-			if (game[dice[i]] == game[computer[j]])
-				tempC[j]++;
-		}
-	}
+	int totalH = 0, totalC = 0;
 	for (int i = 0; i < selectH; i++)
 	{
-	    printf("Money earned of Human '%s' is %d\n",game[human[i] - 1], selectMoneyH[i] * tempH[i]);
+		for (int j = 0; j < 3; j++)
+		{
+			//Check value of dice has some select human
+			if (game[dice[j]] == game[human[i] - 1])
+				tempH[i]++;
+		}
+		totalH += selectMoneyH[i] * tempH[i];
 	}
-	printf("\n\n");
 	for (int i = 0; i < selectC; i++)
 	{
-		printf("Money earned of Computer '%s' is %d\n", game[computer[i]], selectMoneyC[i] * tempC[i]);
+		for (int j = 0; j < 3; j++)
+		{
+			//Check value of dice has some select computer
+			if (game[dice[j]] == game[computer[i]])
+				tempC[i]++;
+		}
+		totalC += selectMoneyC[i] * tempH[i];
 	}
+	printf("Money earned of human is:%d USD and damege %d", totalH);
+	printf("\n\n");
+	printf("Money")
 	return 0;
 }
